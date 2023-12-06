@@ -8,18 +8,29 @@
  */
 
 
-  add_action('amin_menu', function(){
+  add_action('admin_menu', function(){
     add_menu_page(
       'Post for X',
       'Post for X',
-      'My_Plugin_page',
+      'manage_options',
+      'my_plugin_page',
       'show_my_plugin_page',
-      'dashicons-admin-generic',
-      0
+      'dashicons-twitter',
+      80
     );
 
   });
 
-  function show_my_plugin_page() {
-    echo '<h2>自動でX(twitter)へ投稿してくれます</h2>';
+  //メニューを表示する関数
+function show_my_plugin_page(){
+
+  ?>
+  <!-- ここにHTML等を記述 -->
+  
+  <h2>X(twitter)へ自動投稿する設定をしよう！</h2>
+  
+  <?php
+  
   }
+  
+  ?>
