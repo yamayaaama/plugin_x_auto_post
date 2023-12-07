@@ -13,24 +13,30 @@
       'Post for X',
       'Post for X',
       'manage_options',
-      'my_plugin_page',
-      'show_my_plugin_page',
+      'post_for_x_dashboard',
+      'post_for_x_dashboard',
       'dashicons-twitter',
-      80
+      99
     );
 
   });
 
-  //メニューを表示する関数
-function show_my_plugin_page(){
+  function post_for_x_dashboard() {
+    if (current_user_can('manage_options')) {
+        include(plugin_dir_path(__FILE__) . 'dashboard.php');
+    } else {
+        wp_die( __('この設定ページのアクセス権限がありません') );
+    }
+}
 
-  ?>
-  <!-- ここにHTML等を記述 -->
-  
-  <h2>X(twitter)へ自動投稿する設定をしよう！</h2>
-  
-  <?php
-  
-  }
-  
-  ?>
+add_action('admin_init', 'my_tweet_plugin_settings');
+
+function my_tweet_plugin_settings() {
+    // Twitter API Key
+    register_setting('my_tweet_plugin_settings', 'my_tweet_api_key');
+
+    // Twitter API Secret
+    register_setting('my_tweet_plugin_settings', 'my_tweet_api_secret');
+
+    // その他の設定項目があればここで追加
+}
